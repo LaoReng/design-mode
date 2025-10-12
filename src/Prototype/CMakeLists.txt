@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.27)
 
 set(
     ${PROJECT_NAME}_HeaderFile
-    ${CMAKE_CURRENT_SOURCE_DIR}/strategy.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/prototype.h
 )
 set(
     ${PROJECT_NAME}_SourceFile
-    ${CMAKE_CURRENT_SOURCE_DIR}/strategy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/prototype.cpp
 )
 target_sources(${PROJECT_NAME} PRIVATE
     ${${PROJECT_NAME}_HeaderFile}
