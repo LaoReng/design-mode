@@ -14,6 +14,9 @@
 #ifdef TEMPLATE_METHOD
 #include "TemplateMethod/templatemethod.h"
 #endif // TEMPLATE_METHOD
+#ifdef FACADE
+#include "Facade/facade.h"
+#endif // FACADE
 
 int main()
 {
@@ -66,6 +69,12 @@ int main()
     epB.Question1();
     epB.Question2();
 #endif // TEMPLATE_METHOD
+#ifdef FACADE
+    CFacade facade;
+    facade.MethodA();
+    facade.MethodB();
+#endif // FACADE
+
 
     return 0;
 }
