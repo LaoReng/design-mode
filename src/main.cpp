@@ -17,6 +17,9 @@
 #ifdef FACADE
 #include "Facade/facade.h"
 #endif // FACADE
+#ifdef BUILDER
+#include "Builder/builder.h"
+#endif // BUILDER
 
 int main()
 {
@@ -74,7 +77,11 @@ int main()
     facade.MethodA();
     facade.MethodB();
 #endif // FACADE
-
+#ifdef BUILDER
+    Builder* pBuilderA = new TranslateBuilderA;
+    Director d(pBuilderA);
+    d.Create();
+#endif // BUILDER
 
     return 0;
 }
