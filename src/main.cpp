@@ -20,6 +20,9 @@
 #ifdef BUILDER
 #include "Builder/builder.h"
 #endif // BUILDER
+#ifdef OBSERVER
+#include "Observer/observer.h"
+#endif // OBSERVER
 
 int main()
 {
@@ -82,6 +85,18 @@ int main()
     Director d(pBuilderA);
     d.Create();
 #endif // BUILDER
+#ifdef OBSERVER
+    Boss laoLu;
+    Effort xiaoZhang(&laoLu);
+    Ease xiaoLi(&laoLu);
+    laoLu.Add(&xiaoZhang);
+    laoLu.Add(&xiaoLi);
+    laoLu.Nodify();
+    std::cout << "========华丽分割线========\n";
+    laoLu.Remove(&xiaoLi);
+    laoLu.Nodify();
+#endif // OBSERVER
+
 
     return 0;
 }
