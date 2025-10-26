@@ -3,6 +3,11 @@ project(design-mode)
 
 add_compile_options("/source-charset:utf-8")
 
+set(BUILD_TYPE "Debug" CACHE STRING "构建类型")
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_BUILD_TYPE ${BUILD_TYPE})
+
 option(SIMPLE_FACTORY_PATTERN "简单工厂模式" ON)
 option(STRATEGY "策略模式" ON)
 option(DECORATOR "装饰模式" ON)
@@ -14,9 +19,12 @@ option(FACADE "外观模式" ON)
 option(BUILDER "建造者模式" ON)
 option(OBSERVER "观察者/发布者-订阅者模式" ON)
 
-set(BUILD_TYPE "Debug" CACHE STRING "构建类型")
-
-set(CMAKE_BUILD_TYPE ${BUILD_TYPE})
+if(MSVC)
+    # 启用目录结构
+    set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+    file(GLOB_RECURSE MODULE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/*.*)
+    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${MODULE_SRC})
+endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -29,6 +37,8 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 else()
     add_library(${PROJECT_NAME} STATIC)
 endif()
+
+add_subdirectory(base)
 
 if(SIMPLE_FACTORY_PATTERN)
     add_definitions(-DSIMPLE_FACTORY_PATTERN)
