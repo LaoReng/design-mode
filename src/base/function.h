@@ -18,7 +18,7 @@ template <class _OBJ, typename _Ret, typename... Args> struct FuncType<_Ret (_OB
     typedef _Ret (_OBJ::*Function)(Args...);
     typedef _Ret(Type)(Args...);
     enum { ArgumentCount = sizeof...(Args), IsClassFunction = true };
-    // 通过该函数创建函数包装器可以优化需要在创建是传入函数参数类型的做法，应该这里可以自动推断！！！！
+    // 通过该函数创建函数包装器可以优化需要在创建是传入函数参数类型的做法，因为这里可以自动推断！！！！
     static CFunctionBase *MakeFunc(Function func)
     {
         return new CFunction<Function, _OBJ *, Args...>(func);
@@ -33,7 +33,7 @@ template <typename _Ret, typename... Args> struct FuncType<_Ret (*)(Args...)>
     typedef _Ret (*Function)(Args...);
     typedef _Ret(Type)(Args...);
     enum { ArgumentCount = sizeof...(Args), IsClassFunction = false };
-    // 通过该函数创建函数包装器可以优化需要在创建是传入函数参数类型的做法，应该这里可以自动推断！！！！
+    // 通过该函数创建函数包装器可以优化需要在创建是传入函数参数类型的做法，因为这里可以自动推断！！！！
     static CFunctionBase *MakeFunc(Function func)
     { 
         return new CFunction<Function, Args...>(func);
