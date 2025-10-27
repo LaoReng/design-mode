@@ -23,45 +23,12 @@
 #ifdef OBSERVER
 #include "Observer/observer.h"
 #endif // OBSERVER
-
-int test1(int  a)
-{
-    std::cout << __FUNCTION__ << " nihao" << a << "   " << std::endl;
-    return 1  - a;
-}
-int test2(int a, int b)
-{
-    std::cout << "nihao\n";
-    return 0;
-}
-
-class ClassTest
-{
-public:
-    void TestCall(int  a, int  b) {
-        std::cout << m_b << __FUNCTION__ << " nihao\n";
-    }
-    void TestCall2(ClassTest* a) {
-        std::cout << a << __FUNCTION__ << " nihao\n";
-    }
-public:
-    int m_b{};
-};
-
+#ifdef ABSTRACT_FACTORY
+#include "AbstractFactory/abstractfactory.h"
+#endif // ABSTRACT_FACTORY
 
 int main()
 {
-    //ClassTest xx;
-    //xx.m_b = 120;
-    //CBinder cbind;
-    //cbind.MakeBinder(&xx, &ClassTest::TestCall);        // 两个参数的成员函数
-    //cbind(1, 2);
-    //cbind.MakeBinder( &test1);      // 一个参数的普通函数
-    //cbind(1);
-
-    //return 0;
-
-
 #ifdef DECORATOR
     Person* per = new Person("Mr.Lu");
     SuitPants* sp = new SuitPants;
@@ -143,6 +110,18 @@ int main()
     laoLu.Remove(&xx, &Ease2::Ease2Update);
     laoLu.Nodify();
 #endif // OBSERVER
+#ifdef ABSTRACT_FACTORY
+    std::cout << "========抽象工厂模式========\n";
+    DataBase::DBType = "Sqlite"; // 替换数据库类型就可以使用不同的数据库
+    IUser* user = DataBase::CreateUser();
+    IDepartment* depar = DataBase::CreateDepartment();
+    user->Insert();
+    depar->Insert();
+    user->GetUser();
+    depar->GetDepartment();
+    std::cout << "========抽象工厂模式========\n";
+#endif // ABSTRACT_FACTORY
+
 
     return 0;
 }

@@ -31,8 +31,8 @@ public:
     template <typename _OBJ, typename _FUNC>
     void Add(_OBJ *sub, _FUNC func)
     {
-        CBinder *pBinder = new CBinder;
-        pBinder->MakeBinder(sub, func);
+        CBinder *pBinder = new CBinder(sub, func);
+        //pBinder->MakeBinder(sub, func);
         m_lstSubs.push_back(pBinder);
     }
     /// @brief 移除订阅者
@@ -58,8 +58,8 @@ public:
     template <typename _OBJ, typename _FUNC>
     void Remove(_OBJ *sub, _FUNC func)
     {
-        CBinder bindData;
-        bindData.MakeBinder(sub, func);
+        CBinder bindData(sub, func);
+        //bindData.MakeBinder(sub, func);
         for (auto it = m_lstSubs.begin(); it != m_lstSubs.end(); it++)
         {
             if (**it == bindData)

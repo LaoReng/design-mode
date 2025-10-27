@@ -7,7 +7,7 @@ template <typename Func> struct FuncType
 {
     enum { ArgumentCount = -1, IsClassFunction = false };
 };
-/// @brief 类成员函数类型
+/// @brief 类成员函数偏特化模板
 /// @tparam _OBJ 类类型
 /// @tparam _Ret 成员函数返回值类型
 /// @tparam ...Args 成员函数参数列表
@@ -24,7 +24,7 @@ template <class _OBJ, typename _Ret, typename... Args> struct FuncType<_Ret (_OB
         return new CFunction<Function, _OBJ *, Args...>(func);
     }
 };
-/// @brief 普通函数类型
+/// @brief 普通函数偏特化模板
 /// @tparam _Ret 函数返回值类型
 /// @tparam ...Args 函数参数列表
 template <typename _Ret, typename... Args> struct FuncType<_Ret (*)(Args...)>
@@ -79,7 +79,6 @@ public:
     {
         auto &_args = *static_cast<std::tuple<Args...> *>(args);
         std::apply(m_pFunc, _args);
-        // m_pFunc(1,2);
     }
 
 private:
