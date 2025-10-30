@@ -1,4 +1,6 @@
 // 抽象工厂
+#include <iostream>
+#include <map>
 
 /// @brief 用户表
 class User
@@ -79,6 +81,28 @@ class SqliteDepartment : public IDepartment
     }
 };
 
+template <class Type>
+IUser *CreateUser()
+{
+    return new Type;
+}
+template <class Type>
+IDepartment *CreateDepartment()
+{
+    return new Type;
+}
+
+typedef IUser *(*CREATE_USER)();
+typedef IDepartment *(*CREATE_DEPARTMENT)();
+
+std::map<std::string, CREATE_USER> static_userItem{
+    {"MYSql", CreateUser<MYSqlUser>},
+    {"Sqlite", CreateUser<SqliteUser>}};
+
+std::map<std::string, CREATE_DEPARTMENT> static_departmentItem{
+    {"MYSql", CreateDepartment<MYSqlDepartment>},
+    {"Sqlite", CreateDepartment<SqliteDepartment>}};
+
 /// @brief 数据库抽象工厂类
 class DataBase
 {
@@ -86,7 +110,8 @@ public:
     static std::string DBType;
     static IUser *CreateUser()
     {
-        if (DBType == "MYSql")
+        return static_userItem[DBType]();
+        /* if (DBType == "MYSql")
         {
             return new MYSqlUser;
         }
@@ -94,11 +119,12 @@ public:
         {
             return new SqliteUser;
         }
-        return nullptr;
+        return nullptr; */
     }
     static IDepartment *CreateDepartment()
     {
-        if (DBType == "MYSql")
+        return static_departmentItem[DBType]();
+        /* if (DBType == "MYSql")
         {
             return new MYSqlDepartment;
         }
@@ -106,7 +132,7 @@ public:
         {
             return new SqliteDepartment;
         }
-        return nullptr;
+        return nullptr; */
     }
 };
 

@@ -112,7 +112,7 @@ int main()
 #endif // OBSERVER
 #ifdef ABSTRACT_FACTORY
     std::cout << "========抽象工厂模式========\n";
-    DataBase::DBType = "Sqlite"; // 替换数据库类型就可以使用不同的数据库
+    DataBase::DBType = "Sqlite"; // Sqlite/MYSql 替换数据库类型就可以使用不同的数据库
     IUser* user = DataBase::CreateUser();
     IDepartment* depar = DataBase::CreateDepartment();
     user->Insert();
